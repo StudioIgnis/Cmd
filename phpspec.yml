@@ -1,0 +1,5 @@
+suites:
+  studioignis_cmd_suite:
+    namespace: StudioIgnis\Cmd
+    psr4_prefix: StudioIgnis\Cmd
+formatter.name: pretty
