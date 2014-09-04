@@ -1,8 +1,11 @@
-<?php namespace StudioIgnis\Cmd;
+<?php namespace StudioIgnis\Cmd\Laravel;
 
+use StudioIgnis\Cmd\Bus as BusInterface;
+use StudioIgnis\Cmd\Command;
+use StudioIgnis\Cmd\NameInflector;
 use Illuminate\Container\Container;
 
-class LaravelBus implements Bus
+class Bus implements BusInterface
 {
     protected $app;
     protected $inflector;

@@ -1,8 +1,8 @@
-<?php namespace StudioIgnis\Cmd\Providers;
+<?php namespace StudioIgnis\Cmd\Laravel;
 
 use Illuminate\Support\ServiceProvider;
 
-class LaravelServiceProvider extends ServiceProvider
+class ServiceProvider extends ServiceProvider
 {
     public function register()
     {
