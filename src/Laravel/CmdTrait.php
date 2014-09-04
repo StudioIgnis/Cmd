@@ -1,7 +1,16 @@
 <?php namespace StudioIgnis\Cmd\Laravel;
 
+use Input, App;
+
 trait CmdTrait
 {
+    public function execute($commandName, array $input = null)
+    {
+        $this->getCommandBus()->execute(
+            $this->cmd($commandName, $input ?: Input::all())
+        );
+    }
+
     public function cmd($commandName, $input)
     {
         $params = [];
@@ -27,5 +36,10 @@ trait CmdTrait
         }
 
         return $class->newInstanceArgs($params);
+    }
+
+    protected function getCommandBus()
+    {
+        return App::make('StudioIgnis\Cmd\Bus');
     }
 }
