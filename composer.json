@@ -1,4 +1,7 @@
 {
+    "name": "studioignis/cmd",
+    "description": "Add command support to your app. Inspired by laracasts/commander.",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "StudioIgnis\\Cmd\\": "src"
