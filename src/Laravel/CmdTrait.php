@@ -8,7 +8,7 @@ trait CmdTrait
 
     public function execute($commandName, array $input = null)
     {
-        $this->getCommandBus()->execute(
+        return $this->getCommandBus()->execute(
             $this->cmd($commandName, $input ?: Input::all())
         );
     }
