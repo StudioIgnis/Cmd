@@ -23,6 +23,6 @@ class Bus implements BusInterface
 
     protected function getHandler(Command $command)
     {
-        return $this->app->make($this->inflector->getHandler($command));
+        return $this->app->make($this->inflector->getHandler(get_class($command)));
     }
 }

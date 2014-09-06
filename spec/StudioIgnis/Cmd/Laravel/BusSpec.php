@@ -23,7 +23,7 @@ class BusSpec extends ObjectBehavior
 
     function it_executes_a_command(Command $cmd, Container $container, NameInflector $inflector, FooHandler $handler)
     {
-        $inflector->getHandler($cmd)
+        $inflector->getHandler(get_class($cmd->getWrappedObject()))
             ->willReturn('FooHandler')
             ->shouldBeCalled();
 
