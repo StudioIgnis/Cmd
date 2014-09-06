@@ -4,7 +4,6 @@ namespace spec\StudioIgnis\Cmd;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use StudioIgnis\Cmd\Command;
 
 class NameInflectorSpec extends ObjectBehavior
 {
@@ -13,10 +12,18 @@ class NameInflectorSpec extends ObjectBehavior
         $this->shouldHaveType('StudioIgnis\Cmd\NameInflector');
     }
 
-    function it_gets_handler_name(Command $command)
+    function it_gets_handler_name()
     {
-        $this->getHandler($command)->shouldBe(
-            get_class($command->getWrappedObject()).'Handler'
+        $this->getHandler('Foo\Command\DoStuff')->shouldBe(
+            'Foo\Handler\DoStuff'
+        );
+
+        $this->getHandler('Foo\Command\DoStuffCommand')->shouldBe(
+            'Foo\Handler\DoStuffHandler'
+        );
+
+        $this->getHandler('Foo\Commands\DoStuffCommand')->shouldBe(
+            'Foo\Handlers\DoStuffHandler'
         );
     }
 }

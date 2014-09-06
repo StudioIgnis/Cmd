@@ -4,8 +4,8 @@ namespace StudioIgnis\Cmd;
 
 class NameInflector
 {
-    public function getHandler(Command $command)
+    public function getHandler($commandName)
     {
-        return str_replace('Command', 'Handler', get_class($command)).'Handler';
+        return str_replace('Command', 'Handler', $commandName);
     }
 }
