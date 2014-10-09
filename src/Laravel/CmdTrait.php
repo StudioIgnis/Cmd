@@ -1,6 +1,7 @@
 <?php namespace StudioIgnis\Cmd\Laravel;
 
 use Input, App;
+use StudioIgnis\Cmd\Command;
 
 trait CmdTrait
 {
@@ -8,9 +9,13 @@ trait CmdTrait
 
     public function execute($commandName, array $input = null)
     {
-        return $this->getCommandBus()->execute(
-            $this->cmd($commandName, $input ?: Input::all())
-        );
+        if ($commandName instanceof Command) {
+            $cmd = $commandName;
+        } else {
+            $cmd = $this->cmd($commandName, $input ?: Input::all());
+        }
+
+        return $this->getCommandBus()->execute($cmd);
     }
 
     protected function getCommandBus()
