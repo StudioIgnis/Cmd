@@ -1,14 +1,14 @@
 <?php
 
-namespace spec\StudioIgnis\Cmd\Laravel;
+namespace spec\StudioIgnis\Cmd;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Illuminate\Container\Container;
-use StudioIgnis\Cmd\NameInflector;
 use StudioIgnis\Cmd\Command;
+use StudioIgnis\Cmd\NameInflector;
+use StudioIgnis\Cmd\Support\Container;
 
-class BusSpec extends ObjectBehavior
+class CommandBusSpec extends ObjectBehavior
 {
     function let(Container $container, NameInflector $inflector)
     {
@@ -17,8 +17,8 @@ class BusSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('StudioIgnis\Cmd\Laravel\Bus');
         $this->shouldHaveType('StudioIgnis\Cmd\Bus');
+        $this->shouldHaveType('StudioIgnis\Cmd\CommandBus');
     }
 
     function it_executes_a_command(Command $cmd, Container $container, NameInflector $inflector, FooHandler $handler)
@@ -27,7 +27,7 @@ class BusSpec extends ObjectBehavior
             ->willReturn('FooHandler')
             ->shouldBeCalled();
 
-        $container->make('FooHandler')
+        $container->resolve('FooHandler')
             ->willReturn($handler)
             ->shouldBeCalled();
 
