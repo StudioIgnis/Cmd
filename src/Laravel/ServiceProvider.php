@@ -13,7 +13,7 @@ class ServiceProvider extends BaseServiceProvider
 
         $this->app->bindShared('StudioIgnis\Cmd\Bus', function($app)
         {
-            return $app->make('StudioIgnis\Cmd\Laravel\CommandBus');
+            return $app->make('StudioIgnis\Cmd\CommandBus');
         });
     }
 }
