@@ -5,6 +5,7 @@ namespace spec\StudioIgnis\Cmd;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use StudioIgnis\Cmd\Command;
+use StudioIgnis\Cmd\Handler;
 use StudioIgnis\Cmd\NameInflector;
 use StudioIgnis\Cmd\Support\Container;
 
@@ -35,9 +36,37 @@ class CommandBusSpec extends ObjectBehavior
 
         $this->execute($cmd);
     }
+
+    function it_explicitly_sets_a_command_handler(Command $cmd, Container $container, FooHandler $handler)
+    {
+        $handlerClass = 'SomeHandler';
+
+        $this->setHandler(get_class($cmd->getWrappedObject()), $handlerClass);
+
+        $container->resolve($handlerClass)
+            ->willReturn($handler)
+            ->shouldBeCalled();
+
+        $handler->handle($cmd)->shouldBeCalled();
+
+        $this->execute($cmd);
+    }
+
+    function it_resolves_a_handler_from_a_closure(Command $cmd, Container $container, FooHandler $handler)
+    {
+        $handlerClass = 'SomeHandler';
+
+        $this->setHandler(get_class($cmd->getWrappedObject()), function() use($handler) {
+            return $handler->getWrappedObject(); // Get double
+        });
+
+        $handler->handle($cmd)->shouldBeCalled();
+
+        $this->execute($cmd);
+    }
 }
 
-class FooHandler
+class FooHandler implements Handler
 {
-    public function handle($cmd) {}
+    public function handle(Command $cmd) {}
 }
