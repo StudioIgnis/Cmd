@@ -52,7 +52,7 @@ class CommandBusSpec extends ObjectBehavior
         $this->execute($cmd);
     }
 
-    function it_resolves_a_handler_from_a_closure(Command $cmd, Container $container, FooHandler $handler)
+    function it_resolves_a_handler_from_a_closure(Command $cmd, FooHandler $handler)
     {
         $handlerClass = 'SomeHandler';
 
