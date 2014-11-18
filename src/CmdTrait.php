@@ -4,7 +4,7 @@ use Input, App;
 
 trait CmdTrait
 {
-    public function cmd($commandName, $input)
+    public function cmd($commandName, array $input)
     {
         $params = [];
 
